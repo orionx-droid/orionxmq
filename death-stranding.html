@@ -4,49 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Death Stranding - Director's Cut</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       color: white;
       overflow-x: hidden;
     }
+
     .gallery {
       display: flex;
       overflow-x: auto;
-      padding: 20px;
-      gap: 15px;
-      background: #111;
+      gap: 30px;
+      padding: 50px 20px;
+      background: #0a0a0a;
+      scroll-snap-type: x mandatory;
     }
+
     .gallery img {
-      height: 250px;
+      height: 300px;
       border-radius: 12px;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
+      scroll-snap-align: center;
+      flex-shrink: 0;
     }
+
     .gallery img:hover {
-      transform: scale(1.1);
+      transform: scale(1.15);
       cursor: pointer;
     }
+
     .character-section {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 100px 20px;
+      height: 100vh;
       background: linear-gradient(145deg, #111, #222);
       overflow: hidden;
     }
+
     .character-image {
-      width: 300px;
-      max-width: 80vw;
+      width: 320px;
+      max-width: 90vw;
       z-index: 2;
-      transition: transform 0.3s ease;
+      transition: transform 0.5s ease;
     }
+
     .character-image:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
+
     .scroll-texts {
       position: absolute;
       top: 0;
@@ -59,39 +70,43 @@
       justify-content: center;
       pointer-events: none;
     }
-    .scroll-texts .text-box {
+
+    .text-box {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
+      transform: translateY(50px) scale(0.9);
+      transition: all 0.8s ease;
       max-width: 600px;
       margin: 20px;
       padding: 20px;
       border-radius: 15px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       text-align: center;
-      color: #f1f1f1;
+      color: #e0e0e0;
       font-size: 1.1em;
     }
+
     .text-box.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
+
     .downloads {
       padding: 50px 20px;
       background: #121212;
     }
+
     .downloads h2 {
       color: #e63946;
+      font-weight: 700;
     }
-    .downloads ol {
-      padding-left: 20px;
-    }
+
     .downloads a {
-      color: #ff6666;
+      color: #ff8888;
       text-decoration: none;
     }
+
     .downloads a:hover {
       text-decoration: underline;
     }
@@ -99,7 +114,7 @@
 </head>
 <body>
 
-  <!-- Galería -->
+  <!-- Carrusel -->
   <div class="gallery">
     <img src="https://i.postimg.cc/jSkdp2bj/1rv.jpg" alt="img1">
     <img src="https://i.postimg.cc/kG9nQtxT/6rv.webp" alt="img2">
@@ -107,25 +122,25 @@
     <img src="https://i.postimg.cc/GmNdMfF8/2rv.png" alt="img4">
   </div>
 
-  <!-- Sección del personaje -->
+  <!-- Sección del personaje central -->
   <div class="character-section">
     <div class="scroll-texts" id="scrollTexts">
       <div class="text-box">UN JUEGO ENTRAÑABLE</div>
       <div class="text-box">MECÁNICAS DE SIGILO</div>
       <div class="text-box">NORMAN REEDUS</div>
-      <div class="text-box">El mundo de Death Stranding está devastado por eventos sobrenaturales, con paisajes desolados, criaturas misteriosas (BTs) y una sociedad fragmentada.</div>
-      <div class="text-box">Los jugadores deben gestionar cuidadosamente su inventario, peso de la carga y recursos para poder sobrevivir y completar las entregas.</div>
-      <div class="text-box">DIRECTOR'S CUT: esta versión de Death Stranding incluye contenido adicional, como nuevas misiones, armas, vehículos y características de juego mejoradas.</div>
+      <div class="text-box">Un mundo devastado por eventos sobrenaturales, con paisajes desolados y criaturas misteriosas.</div>
+      <div class="text-box">Gestiona tu carga y sobrevive para reconstruir la conexión de la humanidad.</div>
+      <div class="text-box">DIRECTOR'S CUT: incluye misiones, armas, vehículos y mejoras adicionales.</div>
     </div>
-    <img class="character-image" src="https://i.postimg.cc/K8Y8pLCV/higsds1-png.png" alt="Personaje Central">
+    <img class="character-image" src="https://i.postimg.cc/NFjr8Mvv/PNG-TRANSPARENTE-IG.png" alt="Personaje Central">
   </div>
 
-  <!-- Enlaces de descarga -->
+  <!-- Enlaces -->
   <div class="downloads">
     <h2>📦 Enlaces de descarga (.rar)</h2>
     <ol>
-      <li><a href=https://mega.nz/file/UU5XFChA#Y05pBfhpKRTA2WvKlSgofqDHFeY9-sGrSrQSjvetJXk target="_blank">Parte 1</a></li>
-      <li><a href=https://mega.nz/file/AEImGKpD#jjpOKQufUM1FpnLZSG7z6q4ZV6zSsZkH-mSiTiRWp2Y target="_blank">Parte 2</a></li>
+      <li><a href="https://mega.nz/file/UU5XFChA#Y05pBfhpKRTA2WvKlSgofqDHFeY9-sGrSrQSjvetJXk" target="_blank">Parte 1</a></li>
+      <li><a href="https://mega.nz/file/AEImGKpD#jjpOKQufUM1FpnLZSG7z6q4ZV6zSsZkH-mSiTiRWp2Y" target="_blank">Parte 2</a></li>
       <li><a href="https://mega.nz/ENLACE3" target="_blank">Parte 3</a></li>
       <li><a href="https://mega.nz/ENLACE4" target="_blank">Parte 4</a></li>
       <li><a href="https://mega.nz/ENLACE5" target="_blank">Parte 5</a></li>
@@ -150,21 +165,15 @@
 
   <script>
     const boxes = document.querySelectorAll('.text-box');
-    const options = {
-      threshold: 0.3
-    };
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, options);
+    }, { threshold: 0.3 });
 
-    boxes.forEach(box => {
-      observer.observe(box);
-    });
+    boxes.forEach(box => observer.observe(box));
   </script>
 
 </body>
