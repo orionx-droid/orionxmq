@@ -2,40 +2,170 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Death Stranding - Director's Cut</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px;
+      gap: 15px;
+      background: #111;
+    }
+    .gallery img {
+      height: 250px;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+    .character-section {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 20px;
+      background: linear-gradient(145deg, #111, #222);
+      overflow: hidden;
+    }
+    .character-image {
+      width: 300px;
+      max-width: 80vw;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+    .character-image:hover {
+      transform: scale(1.05);
+    }
+    .scroll-texts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .scroll-texts .text-box {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+      max-width: 600px;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: #f1f1f1;
+      font-size: 1.1em;
+    }
+    .text-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .downloads {
+      padding: 50px 20px;
+      background: #121212;
+    }
+    .downloads h2 {
+      color: #e63946;
+    }
+    .downloads ol {
+      padding-left: 20px;
+    }
+    .downloads a {
+      color: #ff6666;
+      text-decoration: none;
+    }
+    .downloads a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <h1>Death Stranding (PC) - Director's Cut</h1>
 
-  <img src="https://i.postimg.cc/pLGvnVJ8/higss-monsters.webp" alt="Death Stranding Director's Cut" width="700">
+  <!-- Galería -->
+  <div class="gallery">
+    <img src="https://i.postimg.cc/jSkdp2bj/1rv.jpg" alt="img1">
+    <img src="https://i.postimg.cc/kG9nQtxT/6rv.webp" alt="img2">
+    <img src="https://i.postimg.cc/7YHHb0P6/3rv.jpg" alt="img3">
+    <img src="https://i.postimg.cc/GmNdMfF8/2rv.png" alt="img4">
+  </div>
 
-  <p>Versión completa en español. Incluye todos los updates y crack, dlc y colores extra.</p>
+  <!-- Sección del personaje -->
+  <div class="character-section">
+    <div class="scroll-texts" id="scrollTexts">
+      <div class="text-box">UN JUEGO ENTRAÑABLE</div>
+      <div class="text-box">MECÁNICAS DE SIGILO</div>
+      <div class="text-box">NORMAN REEDUS</div>
+      <div class="text-box">El mundo de Death Stranding está devastado por eventos sobrenaturales, con paisajes desolados, criaturas misteriosas (BTs) y una sociedad fragmentada.</div>
+      <div class="text-box">Los jugadores deben gestionar cuidadosamente su inventario, peso de la carga y recursos para poder sobrevivir y completar las entregas.</div>
+      <div class="text-box">DIRECTOR'S CUT: esta versión de Death Stranding incluye contenido adicional, como nuevas misiones, armas, vehículos y características de juego mejoradas.</div>
+    </div>
+    <img class="character-image" src="https://i.postimg.cc/K8Y8pLCV/higsds1-png.png" alt="Personaje Central">
+  </div>
 
-  <h2>📦 Enlaces de descarga (.rar)</h2>
-  <ol>
-    <li><a href=https://mega.nz/file/UU5XFChA#Y05pBfhpKRTA2WvKlSgofqDHFeY9-sGrSrQSjvetJXk target="_blank">Parte 1</a></li>
-    <li><a href=https://mega.nz/file/AEImGKpD#jjpOKQufUM1FpnLZSG7z6q4ZV6zSsZkH-mSiTiRWp2Y target="_blank">Parte 2</a></li>
-    <li><a href="https://mega.nz/ENLACE3" target="_blank">Parte 3</a></li>
-    <li><a href="https://mega.nz/ENLACE4" target="_blank">Parte 4</a></li>
-    <li><a href="https://mega.nz/ENLACE5" target="_blank">Parte 5</a></li>
-    <li><a href="https://mega.nz/ENLACE6" target="_blank">Parte 6</a></li>
-    <li><a href="https://mega.nz/ENLACE7" target="_blank">Parte 7</a></li>
-    <li><a href="https://mega.nz/ENLACE8" target="_blank">Parte 8</a></li>
-    <li><a href="https://mega.nz/ENLACE9" target="_blank">Parte 9</a></li>
-    <li><a href="https://mega.nz/ENLACE10" target="_blank">Parte 10</a></li>
-    <li><a href="https://mega.nz/ENLACE11" target="_blank">Parte 11</a></li>
-    <li><a href="https://mega.nz/ENLACE12" target="_blank">Parte 12</a></li>
-    <li><a href="https://mega.nz/ENLACE13" target="_blank">Parte 13</a></li>
-    <li><a href="https://mega.nz/ENLACE14" target="_blank">Parte 14</a></li>
-    <li><a href="https://mega.nz/ENLACE15" target="_blank">Parte 15</a></li>
-    <li><a href="https://mega.nz/ENLACE16" target="_blank">Parte 16</a></li>
-    <li><a href="https://mega.nz/ENLACE17" target="_blank">Parte 17</a></li>
-    <li><a href="https://mega.nz/ENLACE18" target="_blank">Parte 18</a></li>
-    <li><a href="https://mega.nz/ENLACE19" target="_blank">Parte 19</a></li>
-  </ol>
+  <!-- Enlaces de descarga -->
+  <div class="downloads">
+    <h2>📦 Enlaces de descarga (.rar)</h2>
+    <ol>
+      <li><a href=https://mega.nz/file/UU5XFChA#Y05pBfhpKRTA2WvKlSgofqDHFeY9-sGrSrQSjvetJXk target="_blank">Parte 1</a></li>
+      <li><a href=https://mega.nz/file/AEImGKpD#jjpOKQufUM1FpnLZSG7z6q4ZV6zSsZkH-mSiTiRWp2Y target="_blank">Parte 2</a></li>
+      <li><a href="https://mega.nz/ENLACE3" target="_blank">Parte 3</a></li>
+      <li><a href="https://mega.nz/ENLACE4" target="_blank">Parte 4</a></li>
+      <li><a href="https://mega.nz/ENLACE5" target="_blank">Parte 5</a></li>
+      <li><a href="https://mega.nz/ENLACE6" target="_blank">Parte 6</a></li>
+      <li><a href="https://mega.nz/ENLACE7" target="_blank">Parte 7</a></li>
+      <li><a href="https://mega.nz/ENLACE8" target="_blank">Parte 8</a></li>
+      <li><a href="https://mega.nz/ENLACE9" target="_blank">Parte 9</a></li>
+      <li><a href="https://mega.nz/ENLACE10" target="_blank">Parte 10</a></li>
+      <li><a href="https://mega.nz/ENLACE11" target="_blank">Parte 11</a></li>
+      <li><a href="https://mega.nz/ENLACE12" target="_blank">Parte 12</a></li>
+      <li><a href="https://mega.nz/ENLACE13" target="_blank">Parte 13</a></li>
+      <li><a href="https://mega.nz/ENLACE14" target="_blank">Parte 14</a></li>
+      <li><a href="https://mega.nz/ENLACE15" target="_blank">Parte 15</a></li>
+      <li><a href="https://mega.nz/ENLACE16" target="_blank">Parte 16</a></li>
+      <li><a href="https://mega.nz/ENLACE17" target="_blank">Parte 17</a></li>
+      <li><a href="https://mega.nz/ENLACE18" target="_blank">Parte 18</a></li>
+      <li><a href="https://mega.nz/ENLACE19" target="_blank">Parte 19</a></li>
+    </ol>
+    <p><strong>📥 Compatible con JDownloader</strong></p>
+    <p><a href="#top">⬅️ Volver al inicio</a></p>
+  </div>
 
-  <p><strong>📥 Compatible con JDownloader (copie todos los enlaces)</strong></p>
+  <script>
+    const boxes = document.querySelectorAll('.text-box');
+    const options = {
+      threshold: 0.3
+    };
 
-  <p><a href="index.html">⬅️ Volver al inicio</a></p>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, options);
+
+    boxes.forEach(box => {
+      observer.observe(box);
+    });
+  </script>
+
 </body>
 </html>
