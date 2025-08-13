@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Warhammer 40K — Videos</title>
+  <style>
+    body { background:#0f1115; color:white; font-family:sans-serif; margin:0; text-align:center; }
+    nav { background:#171a21; padding:1rem; }
+    nav a { color:white; margin:0 1rem; text-decoration:none; }
+    nav a:hover { color:#c19a40; }
+    video { max-width:90%; border:2px solid #c19a40; margin-top:1rem; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="catalogo.html">Catálogo</a>
+    <a href="imagenes.html">Imágenes</a>
+    <a href="videos.html">Videos</a>
+  </nav>
+
+  <h2>Sube un video para verlo aquí</h2>
+  <input type="file" accept="video/*" onchange="previewVideo(event)">
+  <div id="preview"></div>
+
+  <script>
+    function previewVideo(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const vid = document.createElement('video');
+        vid.controls = true;
+        vid.src = URL.createObjectURL(file);
+        document.getElementById('preview').innerHTML = '';
+        document.getElementById('preview').appendChild(vid);
+      }
+    }
+  </script>
+</body>
+</html>
