@@ -9,7 +9,10 @@
     nav { background:#171a21; padding:1rem; }
     nav a { color:white; margin:0 1rem; text-decoration:none; }
     nav a:hover { color:#c19a40; }
-    video { max-width:90%; border:2px solid #c19a40; margin-top:1rem; border-radius:8px; }
+    video { max-width:90%; border:2px solid #c19a40; margin-top:1rem; border-radius:8px; display:block; margin:auto; }
+    small { display:inline-block; margin-bottom:1rem; cursor:pointer; color:#f55; }
+    button { background:#c19a40; color:white; border:none; padding:0.5rem 1rem; margin-top:1rem; cursor:pointer; border-radius:5px; }
+    button:hover { background:#e6b84c; }
   </style>
 </head>
 <body>
@@ -20,21 +23,21 @@
     <a href="videos.html">Videos</a>
   </nav>
 
-  <h2>Sube uno o varios videos para verlos aquí</h2>
+  <h2>Sube uno o varios videos</h2>
   <input type="file" accept="video/*" multiple onchange="previewVideo(event)">
+  <br>
+  <button onclick="saveVideos()">Guardar videos</button>
   <div id="preview"></div>
 
   <script>
-    // Mostrar videos guardados al cargar la página
     window.onload = function() {
       const savedVideos = JSON.parse(localStorage.getItem('videos')) || [];
       const previewDiv = document.getElementById('preview');
 
-      savedVideos.forEach(dataUrl => {
-        const vid = document.createElement('video');
-        vid.controls = true;
-        vid.src = dataUrl;
+      savedVideos.forEach(src => {
+        const vid = createVideoElement(src);
         previewDiv.appendChild(vid);
+        addDeleteButtonForVideo(vid);
       });
     };
 
@@ -42,28 +45,44 @@
       const files = event.target.files;
       const previewDiv = document.getElementById('preview');
 
-      let savedVideos = JSON.parse(localStorage.getItem('videos')) || [];
-
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const reader = new FileReader();
 
         reader.onload = function(e) {
-          const dataUrl = e.target.result;
-
-          // Mostrar el video
-          const vid = document.createElement('video');
-          vid.controls = true;
-          vid.src = dataUrl;
+          const vid = createVideoElement(e.target.result);
           previewDiv.appendChild(vid);
-
-          // Guardar en localStorage
-          savedVideos.push(dataUrl);
-          localStorage.setItem('videos', JSON.stringify(savedVideos));
+          addDeleteButtonForVideo(vid);
         };
 
         reader.readAsDataURL(file);
       }
+    }
+
+    function createVideoElement(src) {
+      const vid = document.createElement('video');
+      vid.controls = true;
+      vid.src = src;
+      return vid;
+    }
+
+    function saveVideos() {
+      const videos = document.querySelectorAll('#preview video');
+      let savedVideos = [];
+      videos.forEach(vid => savedVideos.push(vid.src));
+      localStorage.setItem('videos', JSON.stringify(savedVideos));
+      alert("Videos guardados correctamente.");
+    }
+
+    function addDeleteButtonForVideo(vid) {
+      const deleteBtn = document.createElement('small');
+      deleteBtn.innerText = "borrar";
+      deleteBtn.onclick = function() {
+        vid.nextSibling.remove(); // elimina el botón
+        vid.remove();
+        saveVideos();
+      };
+      vid.insertAdjacentElement('afterend', deleteBtn);
     }
   </script>
 </body>
