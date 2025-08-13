@@ -5,12 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Warhammer 40K — Catálogo</title>
   <style>
-    body { background:#0f1115; color:white; font-family:sans-serif; margin:0; text-align:center; }
-    nav { background:#171a21; padding:1rem; }
-    nav a { color:white; margin:0 1rem; text-decoration:none; }
-    nav a:hover { color:#c19a40; }
-    img { max-width:90%; border:2px solid #c19a40; margin-top:1rem; border-radius:8px; display:block; margin:auto; }
-    small { display:inline-block; margin-bottom:1rem; cursor:pointer; color:#f55; }
+    body {
+      background: #0f1115;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+      text-align: center;
+    }
+    nav {
+      background: #171a21;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: #c19a40;
+    }
+    img {
+      max-width: 90%;
+      border: 2px solid #c19a40;
+      margin: 1rem auto;
+      border-radius: 8px;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    img:hover {
+      transform: scale(1.1);
+      border-color: #ffd700;
+    }
+    small {
+      display: inline-block;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      color: #f55;
+    }
   </style>
 </head>
 <body>
@@ -22,47 +56,49 @@
   </nav>
 
   <h2>Catálogo de Imágenes</h2>
-  <p>Imágenes cargadas automáticamente desde la carpeta <code>imagenes/</code>.</p>
+  <p>Imágenes alojadas en Postimages.</p>
 
   <div id="preview"></div>
 
   <script>
-    // Lista de tus 27 imágenes (coloca los nombres tal cual están en la carpeta)
+    // Lista de URLs directas de Postimages
     const imagenes = [
-      "1be71fcb-f998-4e47-92a4-61bff3238417.jpg",
-      "2cdfe30d-e6d4-4793-9048-5575a79766e3.jpg",
-      "2cfcfe0c-d864-41c8-b6fa-6fd253831399.jpg",
-      "4e298e61-08ae-4f39-9936-2ff02b791926.jpg",
-      "5bdc3958-b80d-4104-8613-ec3bf53ba0d6.jpg",
-      "6a6b9701-2d1d-478b-b0bf-b33556cd6356.jpg",
-      "07ce1b05-3f63-40ab-8a26-7aa23b41ccf3.jpg",
-      "7e39c6e6-c69d-472f-b995-75fbe9067b84.jpg",
-      "11c753f6-1225-4fc3-966e-15e5ae9a1813.jpg",
-      "20bd3e11-70ef-467f-ab23-75d70f715754.jpg",
-      "46e4cbe3-ace3-4cbf-a52c-c9307d7ab1e0.jpg",
-      "55e3314d-e582-4c50-8898-e15e7773bf98.jpg",
-      "77aa368e-8d2a-4d07-b3ce-44df6bf0e569.jpg",
-      "81c86eba-a159-4641-b7cf-04e55c4d59dc.jpg",
-      "82fa4c55-1f67-4918-8b58-0479782de054.jpg",
-      "122ba624-28e8-4dcf-b266-d6a3f512bb5a.jpg",
-      "626e88ac-3ede-407a-b817-3fcc8ffaab8a.jpg",
-      "3132c261-3e9a-4393-b97f-49ff6de0450b.jpg",
-      "57650012-1d39-45d7-857e-0ef7cb357568.jpg",
-      "a718fccc-0d39-4079-9363-c9b697ca1bad.jpg",
-      "b728a949-8f26-41c5-b039-d39b9d0622ab.jpg",
-      "ba10296d-c235-470c-89b5-13b41d612cf4.jpg",
-      "ebcaf83b-92ea-4099-a165-ec6e4b403b22.jpg",
-      "f354ed46-24dc-4ca4-9ae1-93a3f2c3280f.jpg",
-      "f13174c7-040d-4ff4-97a6-241f87f1909a.jpg",
-      "fe114ec0-454a-4205-89da-722d9892d781.jpg",
-      "f0dd637b-943d-4a5e-b8a2-d73d66e49dad.jpg"
+    https://i.postimg.cc/jS1XFbbs/1.jpg 
+    https://i.postimg.cc/1zNHxjmD/2.jpg
+    https://i.postimg.cc/NMqxQkFS/3.jpg
+    https://i.postimg.cc/2yCFZj4x/4.jpg
+    https://i.postimg.cc/PfMMkZjV/5.jpg
+    https://i.postimg.cc/tC3JctG7/6.jpg
+    https://i.postimg.cc/dVn1ss1Y/7.jpg
+    https://i.postimg.cc/5294khmk/8.jpg
+    https://i.postimg.cc/bw6yXmCY/9.jpg
+    https://i.postimg.cc/s2vV35qY/10.jpg
+    https://i.postimg.cc/GpVbtHnZ/11.jpg
+    https://i.postimg.cc/brj80WJg/12.jpg
+    https://i.postimg.cc/VNrcxm04/13.jpg
+    https://i.postimg.cc/zDS1Zd3m/14.jpg
+    https://i.postimg.cc/FH1tSNpm/15.jpg
+    https://i.postimg.cc/xCvBQCfG/16.jpg
+    https://i.postimg.cc/brqWwhr7/17.jpg
+    https://i.postimg.cc/Wp7xfhfT/18.jpg
+    https://i.postimg.cc/W1xyJrt6/19.jpg
+    https://i.postimg.cc/prVctJ1x/20.jpg
+    https://i.postimg.cc/wTC5Xkcv/21.jpg
+    https://i.postimg.cc/kgWQftfy/22.jpg
+    https://i.postimg.cc/ZqZrgKQz/23.jpg
+    https://i.postimg.cc/V6Znd9kz/24.jpg
+    https://i.postimg.cc/ZRQvTTwR/25.jpg
+    https://i.postimg.cc/FFfD015T/26.jpg
+    https://i.postimg.cc/zfXkvGFS/27.jpg
+    
+      // Agrega aquí todas tus demás URLs directas
     ];
 
     const previewDiv = document.getElementById('preview');
 
-    imagenes.forEach(nombre => {
+    imagenes.forEach(url => {
       const img = document.createElement('img');
-      img.src = 'imagenes/' + nombre; // Ruta relativa a tu carpeta de proyecto
+      img.src = url;
 
       const deleteBtn = document.createElement('small');
       deleteBtn.innerText = "borrar";
@@ -77,4 +113,5 @@
   </script>
 </body>
 </html>
+
 
