@@ -1,18 +1,57 @@
-<!doctype html> 
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Warhammer 40K — Videos</title>
+  <title>Warhammer 40K — The Tithes: Videos</title>
   <style>
-    body { background:#0f1115; color:white; font-family:sans-serif; margin:0; text-align:center; }
-    nav { background:#171a21; padding:1rem; }
-    nav a { color:white; margin:0 1rem; text-decoration:none; }
-    nav a:hover { color:#c19a40; }
-    video { max-width:90%; border:2px solid #c19a40; margin-top:1rem; border-radius:8px; display:block; margin:auto; }
-    small { display:inline-block; margin-bottom:1rem; cursor:pointer; color:#f55; }
-    button { background:#c19a40; color:white; border:none; padding:0.5rem 1rem; margin-top:1rem; cursor:pointer; border-radius:5px; }
-    button:hover { background:#e6b84c; }
+    body {
+      background: url('https://i.imgur.com/fkyoZtT.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+      text-align: center;
+    }
+    nav {
+      background: rgba(23, 26, 33, 0.9);
+      padding: 1rem;
+    }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: #c19a40;
+    }
+    iframe {
+      max-width: 90%;
+      height: 500px;
+      border: 2px solid #c19a40;
+      margin-top: 1rem;
+      border-radius: 8px;
+    }
+    h2 {
+      background: rgba(0,0,0,0.7);
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+    }
+    p {
+      background: rgba(0,0,0,0.7);
+      padding: 0.5rem;
+      display: inline-block;
+      margin-top: 1rem;
+      border-radius: 5px;
+    }
+    a {
+      color: #c19a40;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -23,67 +62,25 @@
     <a href="videos.html">Videos</a>
   </nav>
 
-  <h2>Sube uno o varios videos</h2>
-  <input type="file" accept="video/*" multiple onchange="previewVideo(event)">
-  <br>
-  <button onclick="saveVideos()">Guardar videos</button>
-  <div id="preview"></div>
+  <h2>Warhammer 40K — The Tithes</h2>
 
-  <script>
-    window.onload = function() {
-      const savedVideos = JSON.parse(localStorage.getItem('videos')) || [];
-      const previewDiv = document.getElementById('preview');
+  <!-- Video capítulo 1 -->
+  <iframe
+    src="https://drive.google.com/file/d/13NaY1-5vdr39-fBbfIkTT0SjEOp84YxU/preview"
+    allow="autoplay">
+  </iframe>
 
-      savedVideos.forEach(src => {
-        const vid = createVideoElement(src);
-        previewDiv.appendChild(vid);
-        addDeleteButtonForVideo(vid);
-      });
-    };
+  <!-- Video capítulo 2 -->
+  <iframe
+    src="https://drive.google.com/file/d/1RL_q4toyVomVzPFgolB8upnmr_ZHOodb/preview"
+    allow="autoplay">
+  </iframe>
 
-    function previewVideo(event) {
-      const files = event.target.files;
-      const previewDiv = document.getElementById('preview');
-
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-          const vid = createVideoElement(e.target.result);
-          previewDiv.appendChild(vid);
-          addDeleteButtonForVideo(vid);
-        };
-
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function createVideoElement(src) {
-      const vid = document.createElement('video');
-      vid.controls = true;
-      vid.src = src;
-      return vid;
-    }
-
-    function saveVideos() {
-      const videos = document.querySelectorAll('#preview video');
-      let savedVideos = [];
-      videos.forEach(vid => savedVideos.push(vid.src));
-      localStorage.setItem('videos', JSON.stringify(savedVideos));
-      alert("Videos guardados correctamente.");
-    }
-
-    function addDeleteButtonForVideo(vid) {
-      const deleteBtn = document.createElement('small');
-      deleteBtn.innerText = "borrar";
-      deleteBtn.onclick = function() {
-        vid.nextSibling.remove(); // elimina el botón
-        vid.remove();
-        saveVideos();
-      };
-      vid.insertAdjacentElement('afterend', deleteBtn);
-    }
-  </script>
+  <p>
+    Si tienes problemas para reproducir alguno, <br>
+    <a href="https://drive.google.com/drive/folders/1qg8NPZNJnZP7Rqz6hcKG-ullEubb1QWK" target="_blank">
+      haz clic aquí para abrir la carpeta en Google Drive
+    </a>.
+  </p>
 </body>
 </html>
