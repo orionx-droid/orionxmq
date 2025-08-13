@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html> 
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -20,19 +20,49 @@
     <a href="videos.html">Videos</a>
   </nav>
 
-  <h2>Sube un video para verlo aquí</h2>
-  <input type="file" accept="video/*" onchange="previewVideo(event)">
+  <h2>Sube uno o varios videos para verlos aquí</h2>
+  <input type="file" accept="video/*" multiple onchange="previewVideo(event)">
   <div id="preview"></div>
 
   <script>
-    function previewVideo(event) {
-      const file = event.target.files[0];
-      if (file) {
+    // Mostrar videos guardados al cargar la página
+    window.onload = function() {
+      const savedVideos = JSON.parse(localStorage.getItem('videos')) || [];
+      const previewDiv = document.getElementById('preview');
+
+      savedVideos.forEach(dataUrl => {
         const vid = document.createElement('video');
         vid.controls = true;
-        vid.src = URL.createObjectURL(file);
-        document.getElementById('preview').innerHTML = '';
-        document.getElementById('preview').appendChild(vid);
+        vid.src = dataUrl;
+        previewDiv.appendChild(vid);
+      });
+    };
+
+    function previewVideo(event) {
+      const files = event.target.files;
+      const previewDiv = document.getElementById('preview');
+
+      let savedVideos = JSON.parse(localStorage.getItem('videos')) || [];
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          const dataUrl = e.target.result;
+
+          // Mostrar el video
+          const vid = document.createElement('video');
+          vid.controls = true;
+          vid.src = dataUrl;
+          previewDiv.appendChild(vid);
+
+          // Guardar en localStorage
+          savedVideos.push(dataUrl);
+          localStorage.setItem('videos', JSON.stringify(savedVideos));
+        };
+
+        reader.readAsDataURL(file);
       }
     }
   </script>
