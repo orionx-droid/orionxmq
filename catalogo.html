@@ -9,7 +9,8 @@
     nav { background:#171a21; padding:1rem; }
     nav a { color:white; margin:0 1rem; text-decoration:none; }
     nav a:hover { color:#c19a40; }
-    img { max-width:90%; border:2px solid #c19a40; margin-top:1rem; border-radius:8px; display:block; margin-left:auto; margin-right:auto; }
+    img { max-width:90%; border:2px solid #c19a40; margin-top:1rem; border-radius:8px; display:block; margin:auto; }
+    small { display:inline-block; margin-bottom:1rem; cursor:pointer; color:#f55; }
     button { background:#c19a40; color:white; border:none; padding:0.5rem 1rem; margin-top:1rem; cursor:pointer; border-radius:5px; }
     button:hover { background:#e6b84c; }
   </style>
@@ -25,19 +26,18 @@
   <h2>Catálogo — Sube imágenes</h2>
   <input type="file" accept="image/*" multiple onchange="previewImage(event)">
   <br>
-  <button onclick="clearImages()">Borrar todas las imágenes</button>
+  <button onclick="saveImages()">Guardar imágenes</button>
   <div id="preview"></div>
 
   <script>
-    // Mostrar imágenes guardadas al cargar
     window.onload = function() {
       const savedImages = JSON.parse(localStorage.getItem('imagenes')) || [];
       const previewDiv = document.getElementById('preview');
 
-      savedImages.forEach(dataUrl => {
-        const img = document.createElement('img');
-        img.src = dataUrl;
+      savedImages.forEach(src => {
+        const img = createImageElement(src);
         previewDiv.appendChild(img);
+        addDeleteButtonForImage(img);
       });
     };
 
@@ -45,34 +45,44 @@
       const files = event.target.files;
       const previewDiv = document.getElementById('preview');
 
-      let savedImages = JSON.parse(localStorage.getItem('imagenes')) || [];
-
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const reader = new FileReader();
 
         reader.onload = function(e) {
-          const dataUrl = e.target.result;
-
-          // Mostrar imagen en pantalla
-          const img = document.createElement('img');
-          img.src = dataUrl;
+          const img = createImageElement(e.target.result);
           previewDiv.appendChild(img);
-
-          // Guardar en localStorage
-          savedImages.push(dataUrl);
-          localStorage.setItem('imagenes', JSON.stringify(savedImages));
+          addDeleteButtonForImage(img);
         };
 
         reader.readAsDataURL(file);
       }
     }
 
-    function clearImages() {
-      localStorage.removeItem('imagenes');
-      document.getElementById('preview').innerHTML = '';
+    function createImageElement(src) {
+      const img = document.createElement('img');
+      img.src = src;
+      return img;
+    }
+
+    function saveImages() {
+      const images = document.querySelectorAll('#preview img');
+      let savedImages = [];
+      images.forEach(img => savedImages.push(img.src));
+      localStorage.setItem('imagenes', JSON.stringify(savedImages));
+      alert("Imágenes guardadas correctamente.");
+    }
+
+    function addDeleteButtonForImage(img) {
+      const deleteBtn = document.createElement('small');
+      deleteBtn.innerText = "borrar";
+      deleteBtn.onclick = function() {
+        img.nextSibling.remove(); // elimina el botón
+        img.remove();
+        saveImages();
+      };
+      img.insertAdjacentElement('afterend', deleteBtn);
     }
   </script>
 </body>
 </html>
-
