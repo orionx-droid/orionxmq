@@ -33,11 +33,16 @@
       margin: 1rem auto;
       border-radius: 8px;
       display: block;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+      opacity: 0;
+    }
+    img.loaded {
+      opacity: 1;
     }
     img:hover {
       transform: scale(1.1);
       border-color: #ffd700;
+      box-shadow: 0 0 20px #ffd700;
     }
     small {
       display: inline-block;
@@ -63,35 +68,33 @@
   <script>
     // Lista de URLs directas de Postimages
     const imagenes = [
-    https://i.postimg.cc/jS1XFbbs/1.jpg 
-    https://i.postimg.cc/1zNHxjmD/2.jpg
-    https://i.postimg.cc/NMqxQkFS/3.jpg
-    https://i.postimg.cc/2yCFZj4x/4.jpg
-    https://i.postimg.cc/PfMMkZjV/5.jpg
-    https://i.postimg.cc/tC3JctG7/6.jpg
-    https://i.postimg.cc/dVn1ss1Y/7.jpg
-    https://i.postimg.cc/5294khmk/8.jpg
-    https://i.postimg.cc/bw6yXmCY/9.jpg
-    https://i.postimg.cc/s2vV35qY/10.jpg
-    https://i.postimg.cc/GpVbtHnZ/11.jpg
-    https://i.postimg.cc/brj80WJg/12.jpg
-    https://i.postimg.cc/VNrcxm04/13.jpg
-    https://i.postimg.cc/zDS1Zd3m/14.jpg
-    https://i.postimg.cc/FH1tSNpm/15.jpg
-    https://i.postimg.cc/xCvBQCfG/16.jpg
-    https://i.postimg.cc/brqWwhr7/17.jpg
-    https://i.postimg.cc/Wp7xfhfT/18.jpg
-    https://i.postimg.cc/W1xyJrt6/19.jpg
-    https://i.postimg.cc/prVctJ1x/20.jpg
-    https://i.postimg.cc/wTC5Xkcv/21.jpg
-    https://i.postimg.cc/kgWQftfy/22.jpg
-    https://i.postimg.cc/ZqZrgKQz/23.jpg
-    https://i.postimg.cc/V6Znd9kz/24.jpg
-    https://i.postimg.cc/ZRQvTTwR/25.jpg
-    https://i.postimg.cc/FFfD015T/26.jpg
-    https://i.postimg.cc/zfXkvGFS/27.jpg
-    
-      // Agrega aquí todas tus demás URLs directas
+      "https://i.postimg.cc/jS1XFbbs/1.jpg",
+      "https://i.postimg.cc/1zNHxjmD/2.jpg",
+      "https://i.postimg.cc/NMqxQkFS/3.jpg",
+      "https://i.postimg.cc/2yCFZj4x/4.jpg",
+      "https://i.postimg.cc/PfMMkZjV/5.jpg",
+      "https://i.postimg.cc/tC3JctG7/6.jpg",
+      "https://i.postimg.cc/dVn1ss1Y/7.jpg",
+      "https://i.postimg.cc/5294khmk/8.jpg",
+      "https://i.postimg.cc/bw6yXmCY/9.jpg",
+      "https://i.postimg.cc/s2vV35qY/10.jpg",
+      "https://i.postimg.cc/GpVbtHnZ/11.jpg",
+      "https://i.postimg.cc/brj80WJg/12.jpg",
+      "https://i.postimg.cc/VNrcxm04/13.jpg",
+      "https://i.postimg.cc/zDS1Zd3m/14.jpg",
+      "https://i.postimg.cc/FH1tSNpm/15.jpg",
+      "https://i.postimg.cc/xCvBQCfG/16.jpg",
+      "https://i.postimg.cc/brqWwhr7/17.jpg",
+      "https://i.postimg.cc/Wp7xfhfT/18.jpg",
+      "https://i.postimg.cc/W1xyJrt6/19.jpg",
+      "https://i.postimg.cc/prVctJ1x/20.jpg",
+      "https://i.postimg.cc/wTC5Xkcv/21.jpg",
+      "https://i.postimg.cc/kgWQftfy/22.jpg",
+      "https://i.postimg.cc/ZqZrgKQz/23.jpg",
+      "https://i.postimg.cc/V6Znd9kz/24.jpg",
+      "https://i.postimg.cc/ZRQvTTwR/25.jpg",
+      "https://i.postimg.cc/FFfD015T/26.jpg",
+      "https://i.postimg.cc/zfXkvGFS/27.jpg"
     ];
 
     const previewDiv = document.getElementById('preview');
@@ -99,6 +102,11 @@
     imagenes.forEach(url => {
       const img = document.createElement('img');
       img.src = url;
+
+      // Animación de aparición
+      img.onload = () => {
+        img.classList.add('loaded');
+      }
 
       const deleteBtn = document.createElement('small');
       deleteBtn.innerText = "borrar";
