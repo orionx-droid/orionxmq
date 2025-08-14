@@ -6,13 +6,14 @@
   <title>Warhammer 40K — The Tithes: Videos</title>
   <style>
     body {
-      background: url('https://i.postimg.cc/4dbjpZJm/EMPERADOR-CRAN.jpg') no-repeat center center fixed;
+      background: url('https://i.postimg.cc/15gJQPLw/KNIGHT-LORDS-FONDO.jpg') no-repeat center center fixed;
       background-size: cover;
       color: white;
-      font-family: sans-serif;
+      font-family: 'Cinzel', serif;
       margin: 0;
       text-align: center;
     }
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
     nav {
       background: rgba(23, 26, 33, 0.9);
       padding: 1rem;
@@ -21,6 +22,7 @@
       color: white;
       margin: 0 1rem;
       text-decoration: none;
+      font-family: 'Cinzel', serif;
     }
     nav a:hover {
       color: #c19a40;
@@ -37,13 +39,15 @@
       display: inline-block;
       padding: 0.5rem 1rem;
       border-radius: 5px;
+      font-family: 'Cinzel', serif;
     }
-    p {
+    p, label {
       background: rgba(0,0,0,0.7);
       padding: 0.5rem;
       display: inline-block;
       margin-top: 1rem;
       border-radius: 5px;
+      font-family: 'Cinzel', serif;
     }
     a {
       color: #c19a40;
@@ -52,43 +56,51 @@
     a:hover {
       text-decoration: underline;
     }
-    /* Comentarios */
+    /* Estilos comentarios */
     #comentarios {
-      background: rgba(0,0,0,0.8);
-      padding: 1rem;
-      margin: 2rem auto;
       max-width: 800px;
-      border-radius: 8px;
+      margin: 2rem auto;
       text-align: left;
+      background: rgba(0,0,0,0.7);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 2px solid #c19a40;
     }
     #comentarios h3 {
-      margin-top: 0;
+      font-family: 'Cinzel', serif;
+      color: #c19a40;
       text-align: center;
     }
-    #comentarios textarea {
+    .comentario {
+      border-bottom: 1px solid #c19a40;
+      padding: 0.5rem 0;
+    }
+    .comentario:last-child {
+      border-bottom: none;
+    }
+    textarea {
       width: 100%;
       height: 80px;
+      border: 2px solid #c19a40;
       border-radius: 5px;
-      border: none;
+      background: rgba(23, 26, 33, 0.9);
+      color: white;
+      font-family: 'Cinzel', serif;
       padding: 0.5rem;
-      margin-bottom: 0.5rem;
+      resize: none;
     }
-    #comentarios button {
-      background: #c19a40;
-      border: none;
+    button {
+      margin-top: 0.5rem;
       padding: 0.5rem 1rem;
+      background: #c19a40;
+      color: black;
+      border: none;
+      font-family: 'Cinzel', serif;
       cursor: pointer;
       border-radius: 5px;
-      font-weight: bold;
     }
-    #comentarios button:hover {
-      background: #a37f32;
-    }
-    .comentario {
-      background: rgba(255,255,255,0.1);
-      padding: 0.5rem;
-      margin: 0.5rem 0;
-      border-radius: 5px;
+    button:hover {
+      background: gold;
     }
   </style>
 </head>
@@ -103,16 +115,10 @@
   <h2>Warhammer 40K — The Tithes</h2>
 
   <!-- Video capítulo 1 -->
-  <iframe
-    src="https://drive.google.com/file/d/13NaY1-5vdr39-fBbfIkTT0SjEOp84YxU/preview"
-    allow="autoplay">
-  </iframe>
+  <iframe src="https://drive.google.com/file/d/13NaY1-5vdr39-fBbfIkTT0SjEOp84YxU/preview" allow="autoplay"></iframe>
 
   <!-- Video capítulo 2 -->
-  <iframe
-    src="https://drive.google.com/file/d/1RL_q4toyVomVzPFgolB8upnmr_ZHOodb/preview"
-    allow="autoplay">
-  </iframe>
+  <iframe src="https://drive.google.com/file/d/1RL_q4toyVomVzPFgolB8upnmr_ZHOodb/preview" allow="autoplay"></iframe>
 
   <p>
     Si tienes problemas para reproducir alguno, <br>
@@ -123,39 +129,39 @@
 
   <!-- Sección de comentarios -->
   <div id="comentarios">
-    <h3>💬 Comentarios</h3>
-    <textarea id="nuevoComentario" placeholder="Escribe tu comentario aquí..."></textarea>
-    <br>
-    <button onclick="agregarComentario()">Enviar</button>
+    <h3>Comentarios</h3>
     <div id="listaComentarios"></div>
+    <label for="nuevoComentario">Escribe tu comentario:</label>
+    <textarea id="nuevoComentario" placeholder="Gloria al Emperador..."></textarea>
+    <button onclick="agregarComentario()">Enviar</button>
   </div>
 
   <script>
-    // Cargar comentarios guardados
-    let comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
-
-    function mostrarComentarios() {
-      let lista = document.getElementById('listaComentarios');
-      lista.innerHTML = '';
-      comentarios.forEach((texto, i) => {
+    function cargarComentarios() {
+      let comentarios = JSON.parse(localStorage.getItem('comentariosWarhammer')) || [];
+      let contenedor = document.getElementById('listaComentarios');
+      contenedor.innerHTML = '';
+      comentarios.forEach(c => {
         let div = document.createElement('div');
         div.className = 'comentario';
-        div.textContent = texto;
-        lista.appendChild(div);
+        div.textContent = c;
+        contenedor.appendChild(div);
       });
     }
 
     function agregarComentario() {
-      let texto = document.getElementById('nuevoComentario').value.trim();
+      let textarea = document.getElementById('nuevoComentario');
+      let texto = textarea.value.trim();
       if (texto) {
+        let comentarios = JSON.parse(localStorage.getItem('comentariosWarhammer')) || [];
         comentarios.push(texto);
-        localStorage.setItem('comentarios', JSON.stringify(comentarios));
-        document.getElementById('nuevoComentario').value = '';
-        mostrarComentarios();
+        localStorage.setItem('comentariosWarhammer', JSON.stringify(comentarios));
+        textarea.value = '';
+        cargarComentarios();
       }
     }
 
-    mostrarComentarios();
+    window.onload = cargarComentarios;
   </script>
 </body>
 </html>
