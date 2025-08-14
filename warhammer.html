@@ -1,69 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Warhammer 40K</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gloria al Emperador</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+<style>
     body {
-      margin: 0;
-      color: white;
-      font-family: 'Cinzel', serif;
-      text-align: center;
-      background-color: #0f1115;
-      background-image: url('https://i.postimg.cc/VkGCt2TY/SANGUINOS.jpg'), 
-                        url('https://i.postimg.cc/PxfbztqR/NECRON-VS-MARINE-HELMERRED.jpg');
-      background-size: 60% auto, 60% auto; /* tamaño de cada imagen */
-      background-position: top left, bottom right; /* diagonal */
-      background-repeat: no-repeat, no-repeat;
-      background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+        font-family: 'Cinzel Decorative', cursive;
+        color: gold;
+        background-color: black;
+        overflow-x: hidden;
     }
 
-    nav {
-      background: rgba(23, 26, 33, 0.9);
-      padding: 1rem;
-      border-bottom: 2px solid #c19a40;
+    /* Contenedor del fondo parallax */
+    .parallax {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        perspective: 1px;
+        transform-style: preserve-3d;
     }
 
-    nav a {
-      color: #fff4d6;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
-      text-shadow: 0 0 5px #c19a40;
+    .layer {
+        position: absolute;
+        width: 120%;
+        height: 120%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.4;
+        transform: translateZ(-1px) scale(2);
     }
 
-    nav a:hover {
-      color: #c19a40;
-      text-shadow: 0 0 10px #fff4d6;
+    .layer1 {
+        background-image: url('https://i.postimg.cc/VkGCt2TY/SANGUINOS.jpg');
+        clip-path: polygon(0 0, 100% 0, 0 100%);
+    }
+
+    .layer2 {
+        background-image: url('https://i.postimg.cc/zXQJNH8S/NECRON-VS-MARINE.jpg');
+        clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+
+    .content {
+        position: relative;
+        padding: 20px;
+        text-align: center;
+        max-width: 900px;
+        margin: auto;
     }
 
     h1 {
-      font-size: 4rem;
-      margin-top: 2rem;
-      text-shadow: 0 0 20px #c19a40, 0 0 40px #c19a40;
-      color: #fff4d6;
+        font-size: 3em;
+        text-shadow: 2px 2px 5px black;
     }
 
-    p {
-      font-size: 1.3rem;
-      text-shadow: 0 0 10px black;
-      max-width: 800px;
-      margin: auto;
+    /* Contador */
+    .counter {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.6);
+        padding: 5px 10px;
+        border-radius: 10px;
+        font-size: 1em;
     }
-  </style>
-  <!-- Fuente imperial -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
+    /* Estrellas */
+    .rating {
+        margin: 20px 0;
+    }
+    .star {
+        font-size: 2em;
+        cursor: pointer;
+        color: gray;
+    }
+    .star.selected {
+        color: gold;
+    }
+
+    /* Comentarios */
+    .comments {
+        background: rgba(0,0,0,0.6);
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+    .comments textarea {
+        width: 100%;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    .comment {
+        background: rgba(255,255,255,0.1);
+        padding: 5px;
+        margin: 5px 0;
+        border-radius: 5px;
+    }
+</style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Inicio</a>
-    <a href="catalogo.html">Catálogo</a>
-    <a href="imagenes.html">Imágenes</a>
-    <a href="videos.html">Videos</a>
-  </nav>
 
-  <h1>⚔️ Warhammer 40K ⚔️</h1>
-  <p>Explora el catálogo, sube imágenes y comparte videos.</p>
+<div class="parallax">
+    <div class="layer layer1"></div>
+    <div class="layer layer2"></div>
+</div>
+
+<div class="counter" id="visitCounter">Visitas: 0</div>
+
+<div class="content">
+    <h1>¡Gloria al Emperador!</h1>
+    <p>Defiende la humanidad con la fuerza de mil soles. No hay piedad para los traidores.</p>
+
+    <!-- Sección de estrellas -->
+    <div class="rating" id="rating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+    </div>
+
+    <!-- Sección de comentarios -->
+    <div class="comments">
+        <textarea id="commentInput" placeholder="Escribe tu comentario..."></textarea>
+        <button onclick="addComment()">Comentar</button>
+        <div id="commentList"></div>
+    </div>
+</div>
+
+<script>
+    // Contador de visitas con localStorage
+    let visits = localStorage.getItem("visitCount") || 0;
+    visits++;
+    localStorage.setItem("visitCount", visits);
+    document.getElementById("visitCounter").innerText = "Visitas: " + visits;
+
+    // Sistema de estrellas
+    const stars = document.querySelectorAll('.star');
+    let ratingValue = localStorage.getItem("pageRating") || 0;
+    if (ratingValue > 0) {
+        highlightStars(ratingValue);
+    }
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            ratingValue = star.getAttribute('data-value');
+            localStorage.setItem("pageRating", ratingValue);
+            highlightStars(ratingValue);
+        });
+    });
+
+    function highlightStars(rating) {
+        stars.forEach(star => {
+            star.classList.toggle('selected', star.getAttribute('data-value') <= rating);
+        });
+    }
+
+    // Sistema de comentarios
+    const commentList = document.getElementById('commentList');
+    let comments = JSON.parse(localStorage.getItem("comments") || "[]");
+    renderComments();
+
+    function addComment() {
+        let commentText = document.getElementById("commentInput").value.trim();
+        if (commentText) {
+            comments.push(commentText);
+            localStorage.setItem("comments", JSON.stringify(comments));
+            document.getElementById("commentInput").value = "";
+            renderComments();
+        }
+    }
+
+    function renderComments() {
+        commentList.innerHTML = "";
+        comments.forEach(c => {
+            let div = document.createElement("div");
+            div.className = "comment";
+            div.innerText = c;
+            commentList.appendChild(div);
+        });
+    }
+</script>
+
 </body>
 </html>
