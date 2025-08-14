@@ -6,7 +6,7 @@
   <title>Warhammer 40K — The Tithes: Videos</title>
   <style>
     body {
-      background: url('https://i.postimg.cc/15gJQPLw/KNIGHT-LORDS-FONDO.jpg') no-repeat center center fixed;
+      background: url('https://i.postimg.cc/4dbjpZJm/EMPERADOR-CRAN.jpg') no-repeat center center fixed;
       background-size: cover;
       color: white;
       font-family: sans-serif;
@@ -52,6 +52,44 @@
     a:hover {
       text-decoration: underline;
     }
+    /* Comentarios */
+    #comentarios {
+      background: rgba(0,0,0,0.8);
+      padding: 1rem;
+      margin: 2rem auto;
+      max-width: 800px;
+      border-radius: 8px;
+      text-align: left;
+    }
+    #comentarios h3 {
+      margin-top: 0;
+      text-align: center;
+    }
+    #comentarios textarea {
+      width: 100%;
+      height: 80px;
+      border-radius: 5px;
+      border: none;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    #comentarios button {
+      background: #c19a40;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    #comentarios button:hover {
+      background: #a37f32;
+    }
+    .comentario {
+      background: rgba(255,255,255,0.1);
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
@@ -82,5 +120,42 @@
       haz clic aquí para abrir la carpeta en Google Drive
     </a>.
   </p>
+
+  <!-- Sección de comentarios -->
+  <div id="comentarios">
+    <h3>💬 Comentarios</h3>
+    <textarea id="nuevoComentario" placeholder="Escribe tu comentario aquí..."></textarea>
+    <br>
+    <button onclick="agregarComentario()">Enviar</button>
+    <div id="listaComentarios"></div>
+  </div>
+
+  <script>
+    // Cargar comentarios guardados
+    let comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
+
+    function mostrarComentarios() {
+      let lista = document.getElementById('listaComentarios');
+      lista.innerHTML = '';
+      comentarios.forEach((texto, i) => {
+        let div = document.createElement('div');
+        div.className = 'comentario';
+        div.textContent = texto;
+        lista.appendChild(div);
+      });
+    }
+
+    function agregarComentario() {
+      let texto = document.getElementById('nuevoComentario').value.trim();
+      if (texto) {
+        comentarios.push(texto);
+        localStorage.setItem('comentarios', JSON.stringify(comentarios));
+        document.getElementById('nuevoComentario').value = '';
+        mostrarComentarios();
+      }
+    }
+
+    mostrarComentarios();
+  </script>
 </body>
 </html>
