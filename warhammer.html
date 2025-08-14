@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gloria al Emperador</title>
+<title>Warhammer 40K</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
 <style>
     body {
@@ -13,9 +13,45 @@
         color: gold;
         background-color: black;
         overflow-x: hidden;
+        text-align: center;
     }
 
-    /* Contenedor del fondo parallax */
+    nav {
+        background: rgba(23, 26, 33, 0.9);
+        padding: 1rem;
+        border-bottom: 2px solid #c19a40;
+        position: relative;
+        z-index: 10;
+    }
+
+    nav a {
+        color: #fff4d6;
+        margin: 0 1rem;
+        text-decoration: none;
+        font-weight: bold;
+        text-shadow: 0 0 5px #c19a40;
+    }
+
+    nav a:hover {
+        color: #c19a40;
+        text-shadow: 0 0 10px #fff4d6;
+    }
+
+    h1 {
+        font-size: 3.5em;
+        margin-top: 2rem;
+        text-shadow: 0 0 20px #c19a40, 0 0 40px #c19a40;
+        color: #fff4d6;
+    }
+
+    p {
+        font-size: 1.3rem;
+        text-shadow: 0 0 10px black;
+        max-width: 800px;
+        margin: auto;
+    }
+
+    /* Contenedor parallax */
     .parallax {
         position: fixed;
         top: 0; left: 0;
@@ -50,14 +86,8 @@
     .content {
         position: relative;
         padding: 20px;
-        text-align: center;
         max-width: 900px;
         margin: auto;
-    }
-
-    h1 {
-        font-size: 3em;
-        text-shadow: 2px 2px 5px black;
     }
 
     /* Contador */
@@ -71,40 +101,54 @@
         font-size: 1em;
     }
 
-    /* Estrellas */
-    .rating {
-        margin: 20px 0;
+    /* Comentarios y estrellas en esquina */
+    .corner-ui {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.6);
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 250px;
+        font-size: 0.8em;
+        text-align: left;
+        z-index: 10;
     }
-    .star {
-        font-size: 2em;
+
+    .corner-ui .star {
+        font-size: 1em;
         cursor: pointer;
         color: gray;
     }
-    .star.selected {
+
+    .corner-ui .star.selected {
         color: gold;
     }
 
-    /* Comentarios */
-    .comments {
-        background: rgba(0,0,0,0.6);
-        padding: 15px;
-        border-radius: 10px;
-        margin-top: 20px;
-    }
-    .comments textarea {
+    .corner-ui textarea {
         width: 100%;
-        height: 60px;
-        margin-bottom: 10px;
+        height: 40px;
+        margin-bottom: 5px;
+        font-size: 0.8em;
     }
-    .comment {
+
+    .corner-ui .comment {
         background: rgba(255,255,255,0.1);
-        padding: 5px;
-        margin: 5px 0;
-        border-radius: 5px;
+        padding: 3px;
+        margin: 3px 0;
+        border-radius: 3px;
+        font-size: 0.75em;
     }
 </style>
 </head>
 <body>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="catalogo.html">Catálogo</a>
+    <a href="imagenes.html">Imágenes</a>
+    <a href="videos.html">Videos</a>
+</nav>
 
 <div class="parallax">
     <div class="layer layer1"></div>
@@ -114,10 +158,12 @@
 <div class="counter" id="visitCounter">Visitas: 0</div>
 
 <div class="content">
-    <h1>¡Gloria al Emperador!</h1>
-    <p>Defiende la humanidad con la fuerza de mil soles. No hay piedad para los traidores.</p>
+    <h1>🛡️ Warhammer 40K 🛡️</h1>
+    <p>Explora el catálogo, sube imágenes y comparte videos. ¡Que la gloria del Emperador guíe tus pasos!</p>
+</div>
 
-    <!-- Sección de estrellas -->
+<div class="corner-ui">
+    <!-- Estrellas -->
     <div class="rating" id="rating">
         <span class="star" data-value="1">★</span>
         <span class="star" data-value="2">★</span>
@@ -126,16 +172,14 @@
         <span class="star" data-value="5">★</span>
     </div>
 
-    <!-- Sección de comentarios -->
-    <div class="comments">
-        <textarea id="commentInput" placeholder="Escribe tu comentario..."></textarea>
-        <button onclick="addComment()">Comentar</button>
-        <div id="commentList"></div>
-    </div>
+    <!-- Comentarios -->
+    <textarea id="commentInput" placeholder="Escribe tu comentario..."></textarea>
+    <button onclick="addComment()">Comentar</button>
+    <div id="commentList"></div>
 </div>
 
 <script>
-    // Contador de visitas con localStorage
+    // Contador de visitas
     let visits = localStorage.getItem("visitCount") || 0;
     visits++;
     localStorage.setItem("visitCount", visits);
